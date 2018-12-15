@@ -4,21 +4,25 @@
     flex-direction: row;
 }
 
+.search-user-textbox-container-input::placeholder {
+    color: #8e8e8e;
+}
 .search-user-textbox-container-input {
     padding-right: 20px;
     padding-left: 20px;
     outline: none;
     width: 400px;
-    border: 1px solid #a9a9a9;
+    border: 1px solid #dbdbdb;
     border-left: none;
     font-size: 18px;
 }
 
 .search-user-textbox-container-button {
     cursor: pointer;
-    font-weight: bold;
     width: 75px;
-    border: 1px solid #a9a9a9;
+    border: 1px solid #dbdbdb;
+    background-color: #fafafa;
+    color: #999999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,7 +32,7 @@
     box-shadow: 0 2px 10px #bdc6cf;
     position: absolute;
     background-color: white;
-    width: 500px;
+    width: 600px;
 }
 
 .search-user-textbox-list-item:hover {

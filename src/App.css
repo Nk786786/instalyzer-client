@@ -1,16 +1,35 @@
 .app {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+.app-body {
   width: 1000px;
+  margin-top: 50px;
+}
+
+.heading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.0975);
 }
 
 .heading {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 1000px;
+}
+
+.menu-link-item {
+  color: #3897f0;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .logo-image-container {
@@ -18,7 +37,7 @@
 }
 
 .logo-image {
-  width: 70px;
+  width: 35px;
 }
 
 .main-menu {
