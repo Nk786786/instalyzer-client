@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SearchUserTextBox.css';
+import { Route } from 'react-router-dom'
 
 const mockListJson = [
     {
@@ -31,52 +32,55 @@ class SearchUserTextBox extends Component {
         };
 
         this.setTextboxValue = this.setTextboxValue.bind(this);
-        this.checkUser = this.checkUser.bind(this);
+        this.previewUser = this.previewUser.bind(this);
     }
 
     setTextboxValue(value) {
         const textboxValue = value.target.value;
-        const foundUsers = textboxValue != '' ? mockListJson : [];
+        const foundUsers = textboxValue !== '' ? mockListJson : [];
         this.setState({ textboxValue, foundUsers });
     }
 
-    checkUser(username) {
-        console.log('Fetching ' + username);
-        fetch('http://localhost:3001/account/' + username)
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                console.log(json);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+    previewUser(username, history) {
+        history.push('/preview/' + username);
+        // console.log('Fetching ' + username);
+        // fetch('http://localhost:3001/account/' + username)
+        //     .then((response) => {
+        //         return response.json();
+        //     })
+        //     .then((json) => {
+        //         console.log(json);
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //     });
     }
 
     render() {
         return (
-            <div className='search-user-textbox-container'>
-                <div className='search-user-textbox-input-container'>
-                    <input className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
-                    <div className='search-user-textbox-container-button' onClick={() => this.checkUser(this.state.textboxValue)}>חיפוש</div>
-                </div>
-                {!!this.state.foundUsers.length &&
-                    <div className='search-user-textbox-list-container'>
-                        {mockListJson.map((item) => (
-                            <div onClick={() => this.checkUser(item.userName)} key={item.userName} className='search-user-textbox-list-item'>
-                                <div className='search-user-textbox-list-item-image'>
-                                    <img src={item.imageUrl} />
-                                </div>
-                                <div className='search-user-textbox-list-item-user'>
-                                    <div className='search-user-textbox-list-item-user-username'>{item.userName}</div>
-                                    <div className='search-user-textbox-list-item-user-displayname'>{item.displayName}</div>
-                                </div>
-                            </div>
-                        ))}
+            <Route render={({ history }) => (
+                <div className='search-user-textbox-container'>
+                    <div className='search-user-textbox-input-container'>
+                        <input className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
+                        <div className='search-user-textbox-container-button' onClick={() => this.previewUser(this.state.textboxValue, history)}>חיפוש</div>
                     </div>
-                }
-            </div>
+                    {!!this.state.foundUsers.length &&
+                        <div className='search-user-textbox-list-container'>
+                            {mockListJson.map((item) => (
+                                <div key={item.userName} onClick={() => this.previewUser(item.userName, history)} className='search-user-textbox-list-item'>
+                                    <div className='search-user-textbox-list-item-image'>
+                                        <img src={item.imageUrl} alt="" />
+                                    </div>
+                                    <div className='search-user-textbox-list-item-user'>
+                                        <div className='search-user-textbox-list-item-user-username'>{item.userName}</div>
+                                        <div className='search-user-textbox-list-item-user-displayname'>{item.displayName}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    }
+                </div>)}>
+            </Route>
         );
     }
 }

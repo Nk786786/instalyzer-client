@@ -1,0 +1,56 @@
+.preview-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.account-img {
+    border-radius: 80px;
+    margin-left: 80px;
+}
+
+.preview-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.preview-account-details-container {
+    display: flex;
+    flex-direction: row;
+}
+.preview-account-username {
+    cursor: pointer;
+    margin-left: 30px;
+    font-size: 28px;
+    color: #3897f0;
+    font-family: 'Open Sans';
+}
+.preview-account-displayname {
+    font-size: 28px;
+    color: #262626;
+    font-family: 'Open Sans';
+    font-weight: bold;
+}
+
+.preview-account-social-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+.preview-account-social-item {
+    margin-left: 40px;
+}
+
+.preview-check-account-button {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content:
+    center;
+    margin-top: 20px;
+    font-size: 20px;
+    border: 1px solid #3897f0;
+    color: #3897f0;
+    padding: 5px;
+}

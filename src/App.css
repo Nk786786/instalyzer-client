@@ -7,7 +7,7 @@
 
 .app-body {
   width: 1000px;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .heading-container {
@@ -16,6 +16,7 @@
   justify-content: center;
   background-color: #fff;
   border-bottom: 1px solid rgba(0,0,0,.0975);
+  height: 75px;
 }
 
 .heading {
@@ -34,6 +35,9 @@
 
 .logo-image-container {
   flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .logo-image {

@@ -24,29 +24,32 @@ const mockListJson = [
 class RecentSearchedUsers extends Component {
     render() {
         return (
-            <div className='recent-searched-users-container'>
-                {mockListJson.map((item) => (
-                    <div key={item.userName} className='recent-searched-users-item'>
-                        <img className='recent-searched-users-item-image' src={item.imageUrl} />
-                        <div dir="ltr" className='recent-searched-users-item-text recent-searched-users-item-displayname'>{item.displayName}</div>
-                        <a dir="ltr" target="_blank" href={'https://www.instagram.com/' + item.userName + '/'} className='recent-searched-users-item-text recent-searched-users-item-username'>@{item.userName}</a>
-                        <div className='recent-searched-users-item-account-details'>
-                            <div className='recent-searched-users-item-account-details-item'>
-                                <span>פוסטים</span>
-                                <span>500</span>
-                            </div>
-                            <div className='recent-searched-users-item-account-details-item'>
-                                <span>עוקב</span>
-                                <span>10K</span>
-                            </div>
+            <div>
+                <span style={{ color: '#bbb', marginRight: '4px', fontSize: '16px', fontWeight: 'bold' }}>חיפושים אחרונים</span>
+                <div className='recent-searched-users-container'>
+                    {mockListJson.map((item) => (
+                        <div key={item.userName} className='recent-searched-users-item'>
+                            <img className='recent-searched-users-item-image' src={item.imageUrl} alt="" />
+                            <div dir="ltr" className='recent-searched-users-item-text recent-searched-users-item-displayname'>{item.displayName}</div>
+                            <a dir="ltr" rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + item.userName + '/'} className='recent-searched-users-item-text recent-searched-users-item-username'>@{item.userName}</a>
+                            <div className='recent-searched-users-item-account-details'>
+                                <div className='recent-searched-users-item-account-details-item'>
+                                    <span>פוסטים</span>
+                                    <span>500</span>
+                                </div>
+                                <div className='recent-searched-users-item-account-details-item'>
+                                    <span>עוקב</span>
+                                    <span>10K</span>
+                                </div>
 
-                            <div className='recent-searched-users-item-account-details-item'>
-                                <span>עוקבים</span>
-                                <span>102K</span>
+                                <div className='recent-searched-users-item-account-details-item'>
+                                    <span>עוקבים</span>
+                                    <span>102K</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         );
     }
