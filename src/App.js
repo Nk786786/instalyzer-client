@@ -19,11 +19,13 @@ class App extends Component {
               <li>חיפושים נפוצים</li>
             </ul>
           </div>
-          <div>USER</div>
+          {/* <div>USER</div> */}
         </div>
         <div id='check-user' style={{ display: 'flex', flexDirection: 'column' }}>
-          <h3>TEXT</h3>
-          <SearchUserTextBox />
+          <h3 style={{ fontSize: '42px' }}>בדוק כמה עוקבים מזוייפים יש למשתמשי אינסטגרם</h3>
+          <div style={{ width: '500px', marginBottom: '200px' }}>
+            <SearchUserTextBox />
+          </div>
         </div>
         <RecentSearchedUsers />
       </div>

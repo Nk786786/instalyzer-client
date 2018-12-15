@@ -8,17 +8,50 @@
 
 .recent-searched-users-item {
     margin: 0 5px 0 5px;
-    border: 1px solid black;
+    border: 1px solid #a9a9a9;
     width: 200px;
     height: 230px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 10px 5px 0 5px;
 }
 
 .recent-searched-users-item-image {
     width: 110px;
     border-radius: 57px;
+    margin-bottom: 15px;
+}
+
+.recent-searched-users-item-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+.recent-searched-users-item-displayname {
+    font-size: 18px;
+}
+.recent-searched-users-item-username {
+    font-size: 13px;
+    color: #0074ff;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+.recent-searched-users-item-username:hover {
+    text-decoration: underline;
+}
+
+.recent-searched-users-item-account-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.recent-searched-users-item-account-details-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

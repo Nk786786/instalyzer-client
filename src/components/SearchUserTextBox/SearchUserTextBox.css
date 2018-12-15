@@ -26,6 +26,9 @@
 
 .search-user-textbox-list-container {
     box-shadow: 0 2px 10px #bdc6cf;
+    position: absolute;
+    background-color: white;
+    width: 500px;
 }
 
 .search-user-textbox-list-item:hover {
