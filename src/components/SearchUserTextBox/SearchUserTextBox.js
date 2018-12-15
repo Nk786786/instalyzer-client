@@ -27,6 +27,7 @@ class SearchUserTextBox extends Component {
 
         this.state = {
             textboxValue: '',
+            foundUsers: [],
         };
 
         this.setTextboxValue = this.setTextboxValue.bind(this);
@@ -35,11 +36,11 @@ class SearchUserTextBox extends Component {
 
     setTextboxValue(value) {
         const textboxValue = value.target.value;
-        this.setState({ textboxValue });
+        const foundUsers = textboxValue != '' ? mockListJson : [];
+        this.setState({ textboxValue, foundUsers });
     }
 
-    checkUser() {
-        const username = this.state.textboxValue;
+    checkUser(username) {
         console.log('Fetching ' + username);
         fetch('http://localhost:3001/account/' + username)
             .then((response) => {
@@ -58,21 +59,23 @@ class SearchUserTextBox extends Component {
             <div className='search-user-textbox-container'>
                 <div className='search-user-textbox-input-container'>
                     <input className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
-                    <div className='search-user-textbox-container-button' onClick={this.checkUser}>חיפוש</div>
+                    <div className='search-user-textbox-container-button' onClick={() => this.checkUser(this.state.textboxValue)}>חיפוש</div>
                 </div>
-                <div className='search-user-textbox-list-container'>
-                    {mockListJson.map((item) => (
-                        <div key={item.userName} className='search-user-textbox-list-item'>
-                            <div className='search-user-textbox-list-item-image'>
-                                <img src={item.imageUrl} />
+                {!!this.state.foundUsers.length &&
+                    <div className='search-user-textbox-list-container'>
+                        {mockListJson.map((item) => (
+                            <div onClick={() => this.checkUser(item.userName)} key={item.userName} className='search-user-textbox-list-item'>
+                                <div className='search-user-textbox-list-item-image'>
+                                    <img src={item.imageUrl} />
+                                </div>
+                                <div className='search-user-textbox-list-item-user'>
+                                    <div className='search-user-textbox-list-item-user-username'>{item.userName}</div>
+                                    <div className='search-user-textbox-list-item-user-displayname'>{item.displayName}</div>
+                                </div>
                             </div>
-                            <div className='search-user-textbox-list-item-user'>
-                                <div className='search-user-textbox-list-item-user-username'>{item.userName}</div>
-                                <div className='search-user-textbox-list-item-user-displayname'>{item.displayName}</div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                }
             </div>
         );
     }
