@@ -1,0 +1,24 @@
+.recent-searched-users-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.recent-searched-users-item {
+    margin: 0 5px 0 5px;
+    border: 1px solid black;
+    width: 200px;
+    height: 230px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.recent-searched-users-item-image {
+    width: 110px;
+    border-radius: 57px;
+}

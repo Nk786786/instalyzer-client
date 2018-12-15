@@ -1,0 +1,59 @@
+.search-user-textbox-input-container {
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-user-textbox-container-input {
+    padding-right: 20px;
+    padding-left: 20px;
+    outline: none;
+    width: 400px;
+    border: 1px solid #a9a9a9;
+    border-left: none;
+    font-size: 18px;
+}
+
+.search-user-textbox-container-button {
+    cursor: pointer;
+    font-weight: bold;
+    width: 75px;
+    border: 1px solid #a9a9a9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-user-textbox-list-container {
+    box-shadow: 0 2px 10px #bdc6cf;
+}
+
+.search-user-textbox-list-item:hover {
+    background-color: #f5f5f5;
+}
+.search-user-textbox-list-item {
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px 4px 10px;
+    cursor: pointer;
+}
+.search-user-textbox-list-item:last-child {
+    border-bottom: none;
+}
+
+.search-user-textbox-list-item-image img {
+    width: 55px;
+    border-radius: 40px;
+    margin-left: 15px;
+}
+
+.search-user-textbox-list-item-user-username {
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+.search-user-textbox-list-item-user-displayname {
+    font-size: 14px;
+    color: #b1b1b1;
+}
