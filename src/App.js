@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
-// import SearchUserTextBox from './components/SearchUserTextBox/SearchUserTextBox';
-// import RecentSearchedUsers from './components/RecentSearchedUsers/RecentSearchedUsers';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './views/Home';
 import Preview from './views/Preview/Preview';
@@ -32,19 +30,15 @@ class App extends Component {
               {/* <div>USER</div> */}
             </div>
           </div>
-          {/* <div id='check-user' style={{ display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ fontSize: '30px', fontWeight: '100', width: '600px' }}>בדקו כמה עוקבים מזוייפים יש למשתמשי אינסטגרם באמצעות מנגנון חכם ומתקדם</h3>
-            <div style={{ width: '600px', marginBottom: '200px' }}>
-              <SearchUserTextBox />
-            </div>
-          </div>
-          <RecentSearchedUsers /> */}
           <div className='app-body'>
             <Route exact path="/" component={Home} />
             {/* <Route path="/about" component={About} /> */}
             {/* <Route path="/pricing" component={Topics} /> */}
             {/* <Route path="/popular" component={Topics} /> */}
             <Route path="/preview" component={Preview} />
+          </div>
+          <div style={{ fontSize: '11px', fontWeight: '0', color: '#aaa', borderTop: '1px solid rgba(0,0,0,.0975)', width: '1000px', bottom: '0', position: 'absolute', padding: '10px 0 10px 0' }}>
+            כל הזכויות שמורות <span style={{ fontFamily: 'Open Sans' }}>© Instalyzer</span>
           </div>
         </div>
       </Router>
