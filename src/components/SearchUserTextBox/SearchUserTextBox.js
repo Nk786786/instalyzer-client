@@ -37,23 +37,30 @@ class SearchUserTextBox extends Component {
 
     setTextboxValue(value) {
         const textboxValue = value.target.value;
-        const foundUsers = textboxValue !== '' ? mockListJson : [];
-        this.setState({ textboxValue, foundUsers });
+        // const foundUsers = textboxValue !== '' ? mockListJson : [];
+        this.setState({ textboxValue });
+
+        fetch('http://localhost:3001/accounts?query=' + textboxValue)
+            .then((response) => {
+                return response.json();
+            })
+            .then((jsonResponse) => {
+                const foundUsers = jsonResponse.map(function (userData) {
+                    return ({
+                        userName: userData.username,
+                        displayName: userData.full_name, // change to display name
+                        imageUrl: userData.avatar_url,
+                    });
+                }).slice(0, 6);
+                this.setState({ foundUsers });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     previewUser(username, history) {
         history.push('/preview/' + username);
-        // console.log('Fetching ' + username);
-        // fetch('http://localhost:3001/account/' + username)
-        //     .then((response) => {
-        //         return response.json();
-        //     })
-        //     .then((json) => {
-        //         console.log(json);
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //     });
     }
 
     render() {
@@ -66,7 +73,7 @@ class SearchUserTextBox extends Component {
                     </div>
                     {!!this.state.foundUsers.length &&
                         <div className='search-user-textbox-list-container'>
-                            {mockListJson.map((item) => (
+                            {this.state.foundUsers.map((item) => (
                                 <div key={item.userName} onClick={() => this.previewUser(item.userName, history)} className='search-user-textbox-list-item'>
                                     <div className='search-user-textbox-list-item-image'>
                                         <img src={item.imageUrl} alt="" />

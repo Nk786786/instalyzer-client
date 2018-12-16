@@ -21,6 +21,7 @@
 }
 .preview-account-username {
     cursor: pointer;
+    text-decoration: none;
     margin-left: 30px;
     font-size: 28px;
     color: #3897f0;
