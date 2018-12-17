@@ -38,9 +38,11 @@ class Preview extends Component {
             this.setState({ emailError });
         } else {
             const emailError = '';
-
             const modalOpen = false;
-            this.setState({ emailError, modalOpen });
+            let successMessage = 'שולח בקשה ...'
+            this.setState({ emailError, modalOpen, successMessage });
+
+            const me = this;
 
             fetch('http://localhost:3001/report', {
                 method: "POST",
@@ -48,8 +50,8 @@ class Preview extends Component {
                 body: JSON.stringify({ mail: emailAddress }),
             })
                 .then(function () {
-                    const successMessage = 'הבקשה נשלחה בהצלחה.'
-                    this.setState({ successMessage });
+                    successMessage = 'הבקשה נשלחה בהצלחה.'
+                    me.setState({ successMessage });
                 })
                 .catch(function (err) {
                     console.error(err);
