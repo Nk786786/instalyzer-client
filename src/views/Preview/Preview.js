@@ -18,6 +18,7 @@ class Preview extends Component {
             avatarUrl: '',
             emailAddress: '',
             emailError: '',
+            successMessage: '',
         }
 
         this.updateEmailAddressTextbox = this.updateEmailAddressTextbox.bind(this);
@@ -32,14 +33,27 @@ class Preview extends Component {
 
     sendEmail() {
         const { emailAddress } = this.state;
-        console.log(emailAddress);
-        console.log(validateEmailAddress(emailAddress));
         if (emailAddress === '' || emailAddress === null || !validateEmailAddress(emailAddress)) {
-            const emailError = 'יש להזין כתובת מייל תקינה';
+            const emailError = 'יש להזין כתובת מייל תקינה.';
             this.setState({ emailError });
         } else {
-            console.log(emailAddress);
-            this.setState({ emailError: '' });
+            const emailError = '';
+
+            const modalOpen = false;
+            this.setState({ emailError, modalOpen });
+
+            fetch('http://localhost:3001/report', {
+                method: "POST",
+                headers: { "Content-Type": "application/json; charset=utf-8", },
+                body: JSON.stringify({ mail: emailAddress }),
+            })
+                .then(function () {
+                    const successMessage = 'הבקשה נשלחה בהצלחה.'
+                    this.setState({ successMessage });
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
         }
     }
 
@@ -93,15 +107,21 @@ class Preview extends Component {
                                     <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
                                 </div>
                             </div>
-                            <Modal open={this.state.modalOpen} onClose={this.toggleModalOpen} center>
-                                <div style={{ borderBottom: '1px solid rgba(0,0,0,.0975)', height: '30px', paddingRight: '30px' }}>המשך ביצוע סריקת משתמש</div>
-                                <div style={{ width: '500px', marginTop: '10px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
-                                <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' style={{ marginTop: '15px', height: '40px', width: '93%', padding: '0 15px 0 15px' }} />
-                                {this.state.emailError &&
-                                    <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
-                                }
-                                <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
-                            </Modal>
+                            {this.state.modalOpen && !this.state.successMessage &&
+                                <div>
+                                    <div style={{ marginTop: '20px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
+                                    <div>
+                                        <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
+                                        {this.state.emailError &&
+                                            <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
+                                        }
+                                        <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
+                                    </div>
+                                </div>
+                            }
+                            {this.state.successMessage &&
+                                <div style={{ marginTop: '40px', fontWeight: 'bold' }}>{this.state.successMessage}</div>
+                            }
                         </div>
                     )
                     : (

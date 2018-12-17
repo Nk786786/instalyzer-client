@@ -4,6 +4,45 @@
     flex-direction: row;
 }
 
+@media only screen and (min-width: 751px) {
+    .search-user-textbox-container-input,
+    .search-user-textbox-container-button {
+        font-size: 16px;
+    }
+    .search-user-textbox-container-input {
+        width: 85%;
+    }
+    .search-user-textbox-container-button {
+        width: 15%;
+    }
+}
+@media only screen and (max-width: 750px) and (min-width: 401px) {
+    .search-user-textbox-container-input,
+    .search-user-textbox-container-button {
+        font-size: 14px;
+    }
+    .search-user-textbox-container-input {
+        width: 70%;
+    }
+    .search-user-textbox-container-button {
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .search-user-textbox-container-input,
+    .search-user-textbox-container-button {
+        font-size: 12px;
+    }
+    .search-user-textbox-container-input {
+        width: 75%;
+    }
+    .search-user-textbox-container-button {
+        width: 25%;
+    }
+    .search-user-textbox-input-container {
+        height: 40px;
+    }
+}
 .search-user-textbox-container-input::placeholder {
     color: #8e8e8e;
 }
@@ -11,18 +50,16 @@
     padding-right: 20px;
     padding-left: 20px;
     outline: none;
-    width: 400px;
     border: 1px solid #dbdbdb;
     border-left: none;
-    font-size: 18px;
 }
 
 .search-user-textbox-container-button {
     cursor: pointer;
-    width: 75px;
-    border: 1px solid #dbdbdb;
-    background-color: #fafafa;
-    color: #999999;
+    border: 1px solid #3282e2;
+    background-color: #3282e2;
+    color: white;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;

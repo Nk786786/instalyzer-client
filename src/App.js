@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './views/Home';
+import Home from './views/Home/Home';
 import Preview from './views/Preview/Preview';
 
 class App extends Component {
@@ -37,9 +37,9 @@ class App extends Component {
             {/* <Route path="/popular" component={Topics} /> */}
             <Route path="/preview" component={Preview} />
           </div>
-          <div style={{ fontSize: '11px', fontWeight: '0', color: '#aaa', borderTop: '1px solid rgba(0,0,0,.0975)', width: '1000px', bottom: '0', position: 'absolute', padding: '10px 0 10px 0' }}>
+          {/* <div style={{ fontSize: '11px', fontWeight: '0', color: '#aaa', borderTop: '1px solid rgba(0,0,0,.0975)', width: '1000px', bottom: '0', position: 'absolute', padding: '10px 0 10px 0' }}>
             כל הזכויות שמורות <span style={{ fontFamily: 'Open Sans' }}>© Instalyzer</span>
-          </div>
+          </div> */}
         </div>
       </Router>
     );
