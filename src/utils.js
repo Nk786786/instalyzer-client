@@ -7,3 +7,8 @@ export const numberWithUnit = function (number) {
 
     return number;
 }
+
+export const validateEmailAddress = function (emailAddress) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(emailAddress);
+}

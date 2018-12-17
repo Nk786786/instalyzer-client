@@ -58,14 +58,14 @@ class RecentSearchedUsers extends Component {
             <div>
                 {this.state.popularSearches.length > 0 &&
                     <div>
-                        <span style={{ color: '#bbb', marginRight: '4px', fontSize: '16px', fontWeight: 'bold' }}>חיפושים נפוצים</span>
+                        <span style={{ color: '#777777', marginRight: '4px', fontSize: '17px' }}>חיפושים נפוצים</span>
 
                         <div className='recent-searched-users-container'>
                             {this.state.popularSearches.map((item) => (
                                 <div key={item.userName} className='recent-searched-users-item'>
                                     <img className='recent-searched-users-item-image' src={item.imageUrl} alt="" />
                                     <div dir="ltr" className='recent-searched-users-item-text recent-searched-users-item-displayname'>{item.displayName}</div>
-                                    <a dir="ltr" rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + item.userName + '/'} className='recent-searched-users-item-text recent-searched-users-item-username'>@{item.userName}</a>
+                                    <a dir="ltr" rel="noopener noreferrer" target="_blank" href={'/preview/' + item.userName} className='recent-searched-users-item-text recent-searched-users-item-username'>@{item.userName}</a>
                                     <div className='recent-searched-users-item-account-details'>
                                         <div className='recent-searched-users-item-account-details-item'>
                                             <span className='recent-searched-users-detail-name'>פוסטים</span>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Preview.css';
 import Modal from 'react-responsive-modal';
 import spinner from './spinner.svg';
-import { numberWithUnit } from '../../utils';
+import { numberWithUnit, validateEmailAddress } from '../../utils';
 
 class Preview extends Component {
     constructor(props) {
@@ -16,14 +16,36 @@ class Preview extends Component {
             following: 0,
             followers: 0,
             avatarUrl: '',
+            emailAddress: '',
+            emailError: '',
         }
 
+        this.updateEmailAddressTextbox = this.updateEmailAddressTextbox.bind(this);
         this.toggleModalOpen = this.toggleModalOpen.bind(this);
+        this.sendEmail = this.sendEmail.bind(this);
     }
 
     toggleModalOpen() {
         const modalOpen = !this.state.modalOpen;
         this.setState({ modalOpen });
+    }
+
+    sendEmail() {
+        const { emailAddress } = this.state;
+        console.log(emailAddress);
+        console.log(validateEmailAddress(emailAddress));
+        if (emailAddress === '' || emailAddress === null || !validateEmailAddress(emailAddress)) {
+            const emailError = 'יש להזין כתובת מייל תקינה';
+            this.setState({ emailError });
+        } else {
+            console.log(emailAddress);
+            this.setState({ emailError: '' });
+        }
+    }
+
+    updateEmailAddressTextbox(value) {
+        const emailAddress = value.target.value;
+        this.setState({ emailAddress });
     }
 
     render() {
@@ -72,10 +94,13 @@ class Preview extends Component {
                                 </div>
                             </div>
                             <Modal open={this.state.modalOpen} onClose={this.toggleModalOpen} center>
-                                <div style={{ borderBottom: '1px solid black', height: '30px', paddingRight: '30px' }}>המשך ביצוע סריקת משתמש</div>
-                                <div style={{ width: '500px', marginTop: '10px' }}>כדי שנוכל להמשיך לבדוק את המשתמש eyalgolan1 אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
-                                <input dir="ltr" type='text' placeholder='example@mail.com' style={{ marginTop: '15px', height: '40px', width: '93%', padding: '0 15px 0 15px' }} />
-                                <div style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
+                                <div style={{ borderBottom: '1px solid rgba(0,0,0,.0975)', height: '30px', paddingRight: '30px' }}>המשך ביצוע סריקת משתמש</div>
+                                <div style={{ width: '500px', marginTop: '10px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
+                                <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' style={{ marginTop: '15px', height: '40px', width: '93%', padding: '0 15px 0 15px' }} />
+                                {this.state.emailError &&
+                                    <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
+                                }
+                                <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
                             </Modal>
                         </div>
                     )
