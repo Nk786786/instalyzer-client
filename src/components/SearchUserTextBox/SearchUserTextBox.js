@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchUserTextBox.css';
 import { Route } from 'react-router-dom'
+import { debounce } from 'throttle-debounce';
 
 class SearchUserTextBox extends Component {
     constructor(props) {
@@ -13,14 +14,11 @@ class SearchUserTextBox extends Component {
 
         this.setTextboxValue = this.setTextboxValue.bind(this);
         this.previewUser = this.previewUser.bind(this);
+        this.searchUsers = debounce(500, this.searchUsers);
     }
 
-    setTextboxValue(value) {
-        const textboxValue = value.target.value;
-        // const foundUsers = textboxValue !== '' ? mockListJson : [];
-        this.setState({ textboxValue });
-
-        fetch('http://localhost:3001/accounts?query=' + textboxValue)
+    searchUsers(account) {
+        fetch('http://localhost:3001/accounts?query=' + account)
             .then((response) => {
                 return response.json();
             })
@@ -37,6 +35,14 @@ class SearchUserTextBox extends Component {
             .catch((err) => {
                 console.error(err);
             });
+    }
+
+    setTextboxValue(value) {
+        const textboxValue = value.target.value;
+        // const foundUsers = textboxValue !== '' ? mockListJson : [];
+        this.setState({ textboxValue });
+
+        this.searchUsers(textboxValue);
     }
 
     previewUser(username, history) {

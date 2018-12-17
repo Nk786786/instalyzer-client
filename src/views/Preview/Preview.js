@@ -9,9 +9,11 @@ class Preview extends Component {
         this.state = {
             modalOpen: false,
             userName: '',
+            fullName: '',
             posts: 0,
             following: 0,
             followers: 0,
+            avatarUrl: '',
         }
 
         this.toggleModalOpen = this.toggleModalOpen.bind(this);
@@ -39,7 +41,9 @@ class Preview extends Component {
                 const posts = jsonResponse.mediaPosts;
                 const following = jsonResponse.followingCount;
                 const followers = jsonResponse.followerCount;
-                me.setState({ userName, posts, following, followers });
+                const avatarUrl = jsonResponse.avatar_url;
+                const fullName = jsonResponse.full_name;
+                me.setState({ userName, posts, following, followers, avatarUrl, fullName });
             })
             .catch(function (err) {
                 console.error(err);
@@ -50,11 +54,11 @@ class Preview extends Component {
                 {this.state.userName !== '' &&
                     <div>
                         <div className='preview-container'>
-                            <img className='account-img' src='https://instagram.fsdv2-1.fna.fbcdn.net/vp/e92c5f2249bdab612f069bf9332fd125/5CB2BE92/t51.2885-19/s150x150/44773425_340372686748138_3620105840763076608_n.jpg?_nc_ht=instagram.fsdv2-1.fna.fbcdn.net' alt='' />
+                            <img className='account-img' src={this.state.avatarUrl} alt='' />
                             <div className='preview-data-container'>
                                 <div className='preview-account-details-container'>
                                     <a className='preview-account-username' rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + this.state.userName}>{this.state.userName}@</a>
-                                    {/* <span className='preview-account-displayname'>Eyal Golan</span> */}
+                                    <span className='preview-account-displayname'>{this.state.fullName}</span>
                                 </div>
                                 <div className='preview-account-social-container'>
                                     <span className='preview-account-social-item'><b>{this.state.posts}</b> פוסטים</span>

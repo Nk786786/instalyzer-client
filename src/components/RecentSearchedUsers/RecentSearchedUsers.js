@@ -25,7 +25,7 @@ class RecentSearchedUsers extends Component {
     render() {
         return (
             <div>
-                <span style={{ color: '#bbb', marginRight: '4px', fontSize: '16px', fontWeight: 'bold' }}>חיפושים אחרונים</span>
+                <span style={{ color: '#bbb', marginRight: '4px', fontSize: '16px', fontWeight: 'bold' }}>חיפושים נפוצים</span>
                 <div className='recent-searched-users-container'>
                     {mockListJson.map((item) => (
                         <div key={item.userName} className='recent-searched-users-item'>
