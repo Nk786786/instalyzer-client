@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Preview.css';
 import Modal from 'react-responsive-modal';
+import spinner from './spinner.svg';
+import { numberWithUnit } from '../../utils';
 
 class Preview extends Component {
     constructor(props) {
@@ -51,30 +53,38 @@ class Preview extends Component {
 
         return (
             <div>
-                {this.state.userName !== '' &&
-                    <div>
-                        <div className='preview-container'>
-                            <img className='account-img' src={this.state.avatarUrl} alt='' />
-                            <div className='preview-data-container'>
-                                <div className='preview-account-details-container'>
-                                    <a className='preview-account-username' rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + this.state.userName}>{this.state.userName}@</a>
-                                    <span className='preview-account-displayname'>{this.state.fullName}</span>
+                {this.state.userName !== ''
+                    ? (
+                        <div>
+                            <div className='preview-container'>
+                                <img className='account-img' src={this.state.avatarUrl} alt='' />
+                                <div className='preview-data-container'>
+                                    <div className='preview-account-details-container'>
+                                        <a className='preview-account-username' rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + this.state.userName}>{this.state.userName}@</a>
+                                        <span className='preview-account-displayname'>{this.state.fullName}</span>
+                                    </div>
+                                    <div className='preview-account-social-container'>
+                                        <span className='preview-account-social-item'><b>{numberWithUnit(this.state.posts)}</b> פוסטים</span>
+                                        <span className='preview-account-social-item'><b>{numberWithUnit(this.state.followers)}</b> עוקבים</span>
+                                        <span className='preview-account-social-item'><b>{numberWithUnit(this.state.following)}</b> עוקב</span>
+                                    </div>
+                                    <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
                                 </div>
-                                <div className='preview-account-social-container'>
-                                    <span className='preview-account-social-item'><b>{this.state.posts}</b> פוסטים</span>
-                                    <span className='preview-account-social-item'><b>{this.state.followers}</b> עוקבים</span>
-                                    <span className='preview-account-social-item'><b>{this.state.following}</b> עוקב</span>
-                                </div>
-                                <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
                             </div>
+                            <Modal open={this.state.modalOpen} onClose={this.toggleModalOpen} center>
+                                <div style={{ borderBottom: '1px solid black', height: '30px', paddingRight: '30px' }}>המשך ביצוע סריקת משתמש</div>
+                                <div style={{ width: '500px', marginTop: '10px' }}>כדי שנוכל להמשיך לבדוק את המשתמש eyalgolan1 אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
+                                <input dir="ltr" type='text' placeholder='example@mail.com' style={{ marginTop: '15px', height: '40px', width: '93%', padding: '0 15px 0 15px' }} />
+                                <div style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
+                            </Modal>
                         </div>
-                        <Modal open={this.state.modalOpen} onClose={this.toggleModalOpen} center>
-                            <div style={{ borderBottom: '1px solid black', height: '30px', paddingRight: '30px' }}>המשך ביצוע סריקת משתמש</div>
-                            <div style={{ width: '500px', marginTop: '10px' }}>כדי שנוכל להמשיך לבדוק את המשתמש eyalgolan1 אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
-                            <input dir="ltr" type='text' placeholder='example@mail.com' style={{ marginTop: '15px', height: '40px', width: '93%', padding: '0 15px 0 15px' }} />
-                            <div style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
-                        </Modal>
-                    </div>
+                    )
+                    : (
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <span>טוען נתונים עבור {accountName}</span>
+                            <img src={spinner} alt='' />
+                        </div>
+                    )
                 }
             </div>
         );
