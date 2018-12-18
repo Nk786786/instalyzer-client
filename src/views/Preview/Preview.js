@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Preview.css';
-import Modal from 'react-responsive-modal';
 import spinner from './spinner.svg';
 import { numberWithUnit, validateEmailAddress } from '../../utils';
+import { _fetch } from '../../HttpService';
 
 class Preview extends Component {
     constructor(props) {
@@ -44,7 +44,7 @@ class Preview extends Component {
 
             const me = this;
 
-            fetch('http://localhost:3001/report', {
+            _fetch('/report', {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8", },
                 body: JSON.stringify({ mail: emailAddress }),
@@ -72,7 +72,7 @@ class Preview extends Component {
 
         const me = this;
 
-        fetch('http://localhost:3001/account/' + accountName + '/data')
+        _fetch('/account/' + accountName + '/data')
             .then(function (response) {
                 return response.json();
             })

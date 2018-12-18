@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './RecentSearchedUsers.css';
 import { numberWithUnit } from '../../utils';
+import { _fetch } from '../../HttpService';
 
 class RecentSearchedUsers extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class RecentSearchedUsers extends Component {
     }
 
     render() {
-        fetch('http://localhost:3001/popular')
+        _fetch('/popular')
             .then((response) => {
                 return response.json();
             })

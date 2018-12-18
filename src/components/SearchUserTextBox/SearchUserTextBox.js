@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SearchUserTextBox.css';
 import { Route } from 'react-router-dom'
 import { debounce } from 'throttle-debounce';
+import { _fetch } from '../../HttpService';
 
 class SearchUserTextBox extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class SearchUserTextBox extends Component {
     }
 
     searchUsers(account) {
-        fetch('http://localhost:3001/accounts?query=' + account)
+        _fetch('/accounts?query=' + account)
             .then((response) => {
                 return response.json();
             })
