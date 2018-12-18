@@ -47,10 +47,10 @@ class Preview extends Component {
             _fetch('/report', {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8", },
-                body: JSON.stringify({ mail: emailAddress }),
+                body: JSON.stringify({ mail: emailAddress, account: this.state.userName }),
             })
                 .then(function () {
-                    successMessage = 'הבקשה נשלחה בהצלחה.'
+                    successMessage = 'הבקשה נשלחה בהצלחה והדו"ח יישלח למייל בדקות הקרובות.'
                     me.setState({ successMessage });
                 })
                 .catch(function (err) {
