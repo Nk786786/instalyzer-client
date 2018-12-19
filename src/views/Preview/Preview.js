@@ -120,6 +120,7 @@ class Preview extends Component {
                             {this.state.modalOpen && !this.state.successMessage &&
                                 <div>
                                     <div style={{ marginTop: '20px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
+                                    <div style={{ marginTop: '20px', fontWeight: 'bold' }}>** השירות ניתן זמנית בגרסאת בטא בחינם עד ה-31 בינואר 2019</div>
                                     <div>
                                         <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
                                         {this.state.emailError &&
