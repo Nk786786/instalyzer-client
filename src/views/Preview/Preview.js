@@ -24,6 +24,36 @@ class Preview extends Component {
         this.updateEmailAddressTextbox = this.updateEmailAddressTextbox.bind(this);
         this.toggleModalOpen = this.toggleModalOpen.bind(this);
         this.sendEmail = this.sendEmail.bind(this);
+        this.getAccountName = this.getAccountName.bind(this);
+    }
+
+    getAccountName() {
+        const urlpath = window.location.pathname;
+        return (urlpath.endsWith('/')
+            ? urlpath.split('/').slice(-2)
+            : urlpath.split('/').slice(-1))[0];
+    }
+
+    componentDidMount() {
+        const me = this;
+        const accountName = this.getAccountName();
+
+        _fetch('/account/' + accountName + '/data')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonResponse) {
+                const userName = jsonResponse.username;
+                const posts = jsonResponse.mediaPosts;
+                const following = jsonResponse.followingCount;
+                const followers = jsonResponse.followerCount;
+                const avatarUrl = jsonResponse.avatar_url;
+                const fullName = jsonResponse.full_name;
+                me.setState({ userName, posts, following, followers, avatarUrl, fullName });
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
     }
 
     toggleModalOpen() {
@@ -65,29 +95,7 @@ class Preview extends Component {
     }
 
     render() {
-        const urlpath = window.location.pathname;
-        const accountName = (urlpath.endsWith('/')
-            ? urlpath.split('/').slice(-2)
-            : urlpath.split('/').slice(-1))[0];
-
-        const me = this;
-
-        _fetch('/account/' + accountName + '/data')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (jsonResponse) {
-                const userName = jsonResponse.username;
-                const posts = jsonResponse.mediaPosts;
-                const following = jsonResponse.followingCount;
-                const followers = jsonResponse.followerCount;
-                const avatarUrl = jsonResponse.avatar_url;
-                const fullName = jsonResponse.full_name;
-                me.setState({ userName, posts, following, followers, avatarUrl, fullName });
-            })
-            .catch(function (err) {
-                console.error(err);
-            });
+        const accountName = this.getAccountName();
 
         return (
             <div>

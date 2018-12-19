@@ -12,7 +12,7 @@ class RecentSearchedUsers extends Component {
         }
     }
 
-    render() {
+    componentDidMount() {
         _fetch('/popular')
             .then((response) => {
                 return response.json();
@@ -34,7 +34,9 @@ class RecentSearchedUsers extends Component {
             .catch((err) => {
                 console.error(err);
             });
+    }
 
+    render() {
         return (
             <div>
                 {this.state.popularSearches.length > 0 &&
