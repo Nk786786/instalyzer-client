@@ -11,11 +11,18 @@ class SearchUserTextBox extends Component {
         this.state = {
             textboxValue: '',
             foundUsers: [],
+            textboxFocused: false,
         };
 
         this.setTextboxValue = this.setTextboxValue.bind(this);
         this.previewUser = this.previewUser.bind(this);
         this.searchUsers = debounce(500, this.searchUsers);
+        this.toggleTextboxFocus = this.toggleTextboxFocus.bind(this);
+    }
+
+    toggleTextboxFocus() {
+        const textboxFocused = !this.state.textboxFocused;
+        this.setState({ textboxFocused });
     }
 
     searchUsers(account) {
@@ -30,7 +37,7 @@ class SearchUserTextBox extends Component {
                         displayName: userData.full_name, // change to display name
                         imageUrl: userData.avatar_url,
                     });
-                }).slice(0, 6);
+                });
                 this.setState({ foundUsers });
             })
             .catch((err) => {
@@ -55,10 +62,10 @@ class SearchUserTextBox extends Component {
             <Route render={({ history }) => (
                 <div className='search-user-textbox-container'>
                     <div className='search-user-textbox-input-container'>
-                        <input className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
+                        <input onFocus={this.toggleTextboxFocus} onBlur={this.toggleTextboxFocus} className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
                         <div className='search-user-textbox-container-button' onClick={() => this.previewUser(this.state.textboxValue, history)}>חיפוש</div>
                     </div>
-                    {!!this.state.foundUsers.length &&
+                    {!!this.state.foundUsers.length && this.state.textboxFocused &&
                         <div className='search-user-textbox-list-container'>
                             {this.state.foundUsers.map((item) => (
                                 <div key={item.userName} onClick={() => this.previewUser(item.userName, history)} className='search-user-textbox-list-item'>
