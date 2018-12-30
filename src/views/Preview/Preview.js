@@ -128,7 +128,7 @@ class Preview extends Component {
                                 <div>
                                     <div style={{ marginTop: '20px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
                                     <div style={{ marginTop: '20px', fontWeight: 'bold' }}>** השירות ניתן זמנית בגרסאת בטא בחינם עד ה-31 בינואר 2019</div>
-                                    <input style={{ marginTop: '20px' }} type="checkbox" checked={this.state.acceptMails} onClick={this.toggleAcceptMails} /><span style={{ fontSize: '12px' }}>אני מעוניין להצטרף לרשימת התפוצה ומאשר קבלת הודעות פרסומיות בדוא"ל</span>
+                                    <input style={{ marginTop: '20px' }} type="checkbox" checked={this.state.acceptMails} onChange={this.toggleAcceptMails} /><span style={{ fontSize: '12px' }}>אני מעוניין להצטרף לרשימת התפוצה ומאשר קבלת הודעות פרסומיות בדוא"ל</span>
                                     <div>
                                         <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
                                         {this.state.emailError &&
