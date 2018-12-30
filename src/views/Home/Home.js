@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SearchUserTextBox from '../../components/SearchUserTextBox';
 import RecentSearchedUsers from '../../components/RecentSearchedUsers';
-import PayPalCheckout from '../../components/PayPalCheckout';
 import './Home.css';
 
 class Home extends Component {
@@ -13,7 +12,6 @@ class Home extends Component {
                     <div className='search-box-container'>
                         <SearchUserTextBox />
                     </div>
-                    <PayPalCheckout />
                 </div>
                 <RecentSearchedUsers />
             </div>

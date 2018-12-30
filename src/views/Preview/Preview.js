@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Preview.css';
 import spinner from './spinner.svg';
 import { numberWithUnit, validateEmailAddress } from '../../utils';
+import PayPalCheckout from '../../components/PayPalCheckout';
 import { _fetch } from '../../HttpService';
 
 class Preview extends Component {
@@ -126,15 +127,17 @@ class Preview extends Component {
                             </div>
                             {this.state.modalOpen && !this.state.successMessage &&
                                 <div>
-                                    <div style={{ marginTop: '20px' }}>כדי שנוכל להמשיך לבדוק את המשתמש {this.state.userName} אנא הזינו כתובת אימייל תקינה שאליה יישלח הדו"ח</div>
-                                    <div style={{ marginTop: '20px', fontWeight: 'bold' }}>** השירות ניתן זמנית בגרסאת בטא בחינם עד ה-31 בינואר 2019</div>
+                                    <div style={{ marginTop: '20px' }}>לבדיקת החשבון {this.state.userName} בעלות של 20 ש"ח בלבד יש להזין כתובת אימייל תקינה שאליה יישלח הדו"ח המפורט.</div>
                                     <input style={{ marginTop: '20px' }} type="checkbox" checked={this.state.acceptMails} onChange={this.toggleAcceptMails} /><span style={{ fontSize: '12px' }}>אני מעוניין להצטרף לרשימת התפוצה ומאשר קבלת הודעות פרסומיות בדוא"ל</span>
                                     <div>
                                         <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
                                         {this.state.emailError &&
                                             <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
                                         }
-                                        <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div>
+                                        <div style={{ marginTop: '10px' }}>
+                                            <PayPalCheckout />
+                                        </div>
+                                        {/* <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div> */}
                                     </div>
                                 </div>
                             }
