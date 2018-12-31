@@ -68,7 +68,7 @@ class SearchUserTextBox extends Component {
                     {!!this.state.foundUsers.length && this.state.textboxFocused &&
                         <div className='search-user-textbox-list-container'>
                             {this.state.foundUsers.map((item) => (
-                                <div key={item.userName} onClick={() => this.previewUser(this.state.textboxValue, history)} className='search-user-textbox-list-item'>
+                                <div key={item.userName} onClick={() => this.previewUser(item.userName, history)} className='search-user-textbox-list-item'>
                                     <div className='search-user-textbox-list-item-image'>
                                         <img src={item.imageUrl} alt="" />
                                     </div>
