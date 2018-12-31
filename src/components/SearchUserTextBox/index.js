@@ -22,7 +22,7 @@ class SearchUserTextBox extends Component {
 
     toggleTextboxFocus() {
         const textboxFocused = !this.state.textboxFocused;
-        this.setState({ textboxFocused });
+        setTimeout(() => this.setState({ textboxFocused }), 200);
     }
 
     searchUsers(account) {
@@ -60,15 +60,15 @@ class SearchUserTextBox extends Component {
     render() {
         return (
             <Route render={({ history }) => (
-                <div className='search-user-textbox-container'>
+                <div onFocus={this.toggleTextboxFocus} onBlur={this.toggleTextboxFocus} className='search-user-textbox-container'>
                     <div className='search-user-textbox-input-container'>
-                        <input onFocus={this.toggleTextboxFocus} onBlur={this.toggleTextboxFocus} className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
+                        <input className='search-user-textbox-container-input' onChange={this.setTextboxValue} type='text' placeholder='שם משתמש אינסטגרם'></input>
                         <div className='search-user-textbox-container-button' onClick={() => this.previewUser(this.state.textboxValue, history)}>חיפוש</div>
                     </div>
                     {!!this.state.foundUsers.length && this.state.textboxFocused &&
                         <div className='search-user-textbox-list-container'>
                             {this.state.foundUsers.map((item) => (
-                                <div key={item.userName} onClick={() => this.previewUser(item.userName, history)} className='search-user-textbox-list-item'>
+                                <div key={item.userName} onClick={() => this.previewUser(this.state.textboxValue, history)} className='search-user-textbox-list-item'>
                                     <div className='search-user-textbox-list-item-image'>
                                         <img src={item.imageUrl} alt="" />
                                     </div>
