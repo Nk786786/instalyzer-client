@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Preview.css';
 import spinner from './spinner.svg';
-import { numberWithUnit, validateEmailAddress } from '../../utils';
-import PayPalCheckout from '../../components/PayPalCheckout';
+import { numberWithUnit } from '../../utils';
+import PayPalCheckout from '../../components/PayPalCheckout/PayPalCheckout';
 import { _fetch } from '../../HttpService';
 
 class Preview extends Component {
@@ -17,17 +17,10 @@ class Preview extends Component {
             following: 0,
             followers: 0,
             avatarUrl: '',
-            emailAddress: '',
-            emailError: '',
-            successMessage: '',
-            acceptMails: true,
         }
 
-        this.updateEmailAddressTextbox = this.updateEmailAddressTextbox.bind(this);
         this.toggleModalOpen = this.toggleModalOpen.bind(this);
-        this.sendEmail = this.sendEmail.bind(this);
         this.getAccountName = this.getAccountName.bind(this);
-        this.toggleAcceptMails = this.toggleAcceptMails.bind(this);
     }
 
     getAccountName() {
@@ -35,11 +28,6 @@ class Preview extends Component {
         return (urlpath.endsWith('/')
             ? urlpath.split('/').slice(-2)
             : urlpath.split('/').slice(-1))[0];
-    }
-
-    toggleAcceptMails() {
-        const acceptMails = !this.state.acceptMails;
-        this.setState({ acceptMails });
     }
 
     componentDidMount() {
@@ -69,39 +57,6 @@ class Preview extends Component {
         this.setState({ modalOpen });
     }
 
-    sendEmail() {
-        const { emailAddress } = this.state;
-        if (emailAddress === '' || emailAddress === null || !validateEmailAddress(emailAddress)) {
-            const emailError = 'יש להזין כתובת מייל תקינה.';
-            this.setState({ emailError });
-        } else {
-            const emailError = '';
-            const modalOpen = false;
-            let successMessage = 'שולח בקשה ...'
-            this.setState({ emailError, modalOpen, successMessage });
-
-            const me = this;
-
-            _fetch('/report', {
-                method: "POST",
-                headers: { "Content-Type": "application/json; charset=utf-8", },
-                body: JSON.stringify({ mail: emailAddress, account: this.state.userName, acceptMails: this.state.acceptMails }),
-            })
-                .then(function () {
-                    successMessage = 'הבקשה נשלחה בהצלחה והדו"ח יישלח למייל בדקות הקרובות.'
-                    me.setState({ successMessage });
-                })
-                .catch(function (err) {
-                    console.error(err);
-                });
-        }
-    }
-
-    updateEmailAddressTextbox(value) {
-        const emailAddress = value.target.value;
-        this.setState({ emailAddress });
-    }
-
     render() {
         const accountName = this.getAccountName();
 
@@ -125,24 +80,8 @@ class Preview extends Component {
                                     <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
                                 </div>
                             </div>
-                            {this.state.modalOpen && !this.state.successMessage &&
-                                <div>
-                                    <div style={{ marginTop: '20px' }}>לבדיקת החשבון {this.state.userName} בעלות של 20 ש"ח בלבד יש להזין כתובת אימייל תקינה שאליה יישלח הדו"ח המפורט.</div>
-                                    <input style={{ marginTop: '20px' }} type="checkbox" checked={this.state.acceptMails} onChange={this.toggleAcceptMails} /><span style={{ fontSize: '12px' }}>אני מעוניין להצטרף לרשימת התפוצה ומאשר קבלת הודעות פרסומיות בדוא"ל</span>
-                                    <div>
-                                        <input onChange={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
-                                        {this.state.emailError &&
-                                            <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
-                                        }
-                                        <div style={{ marginTop: '10px' }}>
-                                            <PayPalCheckout />
-                                        </div>
-                                        {/* <div onClick={this.sendEmail} style={{ width: '100%', backgroundColor: '#3897f0', color: '#fff', padding: '10px 0 10px 0', marginTop: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>שלח</div> */}
-                                    </div>
-                                </div>
-                            }
-                            {this.state.successMessage &&
-                                <div style={{ marginTop: '40px', fontWeight: 'bold' }}>{this.state.successMessage}</div>
+                            {this.state.modalOpen &&
+                                <PayPalCheckout userName={this.state.userName} />
                             }
                         </div>
                     )
