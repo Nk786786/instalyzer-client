@@ -1,9 +1,9 @@
 {
-    "https_only": true,
     "root": "build/",
     "routes": {
         "/**": "index.html"
     },
+    "https_only": true,
     "clean_urls": true,
     "headers": {
         "/**": {
@@ -13,5 +13,5 @@
           "X-Frame-Options": "DENY",
           "X-XSS-Protection": "1; mode=block"
         }
-      }
+    }
 }
