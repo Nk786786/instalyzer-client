@@ -8,7 +8,7 @@ const PayPalButton = window.paypal.Button.driver('react', { React, ReactDOM });
 
 const paypalClient = {
     sandbox: 'AaJNf3KNzwZbv_0Wd51AYdq_7t-QpvBw4kP4xp2c6Xbehr5xj0kApOlAKa7SdNWJqBhOCa4waFp5Ijb-',
-    production: 'demo_production_client_id'
+    production: 'AeXtb1bhbpeUG1Kwq_fEJC3A8wMZcAWCPjqj8ofYQqzSeeche1wwECi7XCRtd5U7Th43ArIPEfnOFvlF'
 };
 
 class PayPalCheckout extends React.Component {
