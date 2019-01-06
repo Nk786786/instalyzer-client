@@ -64,7 +64,7 @@ class PayPalCheckout extends React.Component {
         });
 
         return actions.payment.execute().then(() => {
-            swal('הידד!', 'העסקה בוצעה בהצלחה.', 'success');
+            swal('הידד!', 'הדו"ח יישלח אליך בדקות הקרובות.', 'success');
         });
     }
 
@@ -109,7 +109,7 @@ class PayPalCheckout extends React.Component {
         return (
             <div>
                 <div style={{ marginTop: '20px' }}>לבדיקת החשבון {this.props.userName} בעלות של 20 ש"ח בלבד יש להזין כתובת אימייל תקינה שאליה יישלח הדו"ח המפורט.</div>
-                <input style={{ marginTop: '20px' }} type="checkbox" checked={this.state.acceptMails} onChange={this.toggleAcceptMails} /><span style={{ fontSize: '12px' }}>אני מעוניין להצטרף לרשימת התפוצה ומאשר קבלת הודעות פרסומיות בדוא"ל</span>
+                <span>כתובת המייל תתווסף לרשימת התפוצה לצורך קבלת תוכן שיווקי.</span>
                 <div>
                     <input onBlur={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
                     {this.state.emailError &&
