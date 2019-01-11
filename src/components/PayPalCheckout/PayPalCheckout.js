@@ -4,11 +4,15 @@ import swal from 'sweetalert';
 import { validateEmailAddress, connectionFailedEvent, uncaughtException } from '../../utils';
 import { _fetch } from '../../HttpService';
 
+const PAYPAL_SANDBOX_CLIENT = process.env.PAYPAL_SANDBOX_CLIENT;
+const PAYPAL_PROD_CLIENT = process.env.PAYPAL_PROD_CLIENT;
+const PAYPAL_ENV = process.env.PAYPAL_ENV;
+
 const PayPalButton = window.paypal.Button.driver('react', { React, ReactDOM });
 
 const paypalClient = {
-    sandbox: 'AaJNf3KNzwZbv_0Wd51AYdq_7t-QpvBw4kP4xp2c6Xbehr5xj0kApOlAKa7SdNWJqBhOCa4waFp5Ijb-',
-    production: 'AeXtb1bhbpeUG1Kwq_fEJC3A8wMZcAWCPjqj8ofYQqzSeeche1wwECi7XCRtd5U7Th43ArIPEfnOFvlF'
+    sandbox: PAYPAL_SANDBOX_CLIENT,
+    production: PAYPAL_PROD_CLIENT,
 };
 
 class PayPalCheckout extends React.Component {
@@ -65,7 +69,7 @@ class PayPalCheckout extends React.Component {
                     } else {
                         connectionFailedEvent(res.status, res.statusText);
                     }
-                    
+
                     swal('אופס', 'היתה תקלה, נסה שוב מאוחר יותר', 'error');
                 }
             }).catch(err => {
@@ -127,7 +131,7 @@ class PayPalCheckout extends React.Component {
                     <div style={{ marginTop: '10px' }}>
                         <PayPalButton
                             commit={true}
-                            env={'sandbox'}
+                            env={PAYPAL_ENV}
                             client={paypalClient}
                             payment={this.payment}
                             onAuthorize={this.onAuthorize}
