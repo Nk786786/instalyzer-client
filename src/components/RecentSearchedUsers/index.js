@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './RecentSearchedUsers.css';
-import { numberWithUnit } from '../../utils';
+import { numberWithUnit, connectionFailedEvent, uncaughtException } from '../../utils';
 import { _fetch } from '../../HttpService';
 
 class RecentSearchedUsers extends Component {
@@ -14,10 +14,19 @@ class RecentSearchedUsers extends Component {
 
     componentDidMount() {
         _fetch('/popular')
-            .then((response) => {
-                return response.json();
+            .then(res => {
+                if (res.status === 200) {
+                    return res.json();
+                } else {
+                    if (res.data) {
+                        connectionFailedEvent(res.status, res.data);
+                    } else {
+                        connectionFailedEvent(res.status, res.statusText);
+                    }
+                    return;
+                }
             })
-            .then((jsonResponse) => {
+            .then(jsonResponse => {
                 const popularSearches = jsonResponse.map(function (popUser) {
                     return ({
                         userName: popUser.username,
@@ -31,8 +40,8 @@ class RecentSearchedUsers extends Component {
 
                 this.setState({ popularSearches });
             })
-            .catch((err) => {
-                console.error(err);
+            .catch(err => {
+                uncaughtException(err.message, err.stack);
             });
     }
 
