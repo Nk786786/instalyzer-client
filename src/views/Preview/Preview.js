@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Preview.css';
 import spinner from './spinner.svg';
-import { numberWithUnit } from '../../utils';
+import { numberWithUnit, connectionFailedEvent, uncaughtException } from '../../utils';
 import PayPalCheckout from '../../components/PayPalCheckout/PayPalCheckout';
 import { _fetch } from '../../HttpService';
 
@@ -35,10 +35,19 @@ class Preview extends Component {
         const accountName = this.getAccountName();
 
         _fetch('/account/' + accountName + '/data')
-            .then(function (response) {
-                return response.json();
+            .then(res => {
+                if (res.status === 200) {
+                    return res.json();
+                } else {
+                    if (res.data) {
+                        connectionFailedEvent(res.status, res.data);
+                    } else {
+                        connectionFailedEvent(res.status, res.statusText);
+                    }
+                    return;
+                }
             })
-            .then(function (jsonResponse) {
+            .then(jsonResponse => {
                 const userName = jsonResponse.username;
                 const posts = jsonResponse.mediaPosts;
                 const following = jsonResponse.followingCount;
@@ -47,8 +56,8 @@ class Preview extends Component {
                 const fullName = jsonResponse.full_name;
                 me.setState({ userName, posts, following, followers, avatarUrl, fullName });
             })
-            .catch(function (err) {
-                console.error(err);
+            .catch(err => {
+                uncaughtException(err.message, err.stack);
             });
     }
 

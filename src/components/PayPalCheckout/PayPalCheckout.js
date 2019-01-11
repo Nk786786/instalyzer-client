@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert';
-import { validateEmailAddress } from '../../utils';
+import { validateEmailAddress, connectionFailedEvent, uncaughtException } from '../../utils';
 import { _fetch } from '../../HttpService';
 
 const PayPalButton = window.paypal.Button.driver('react', { React, ReactDOM });
@@ -46,25 +46,34 @@ class PayPalCheckout extends React.Component {
     }
 
     onAuthorize(data, actions) {
-        _fetch('/report', {
-            method: "POST",
-            headers: { "Content-Type": "application/json; charset=utf-8", },
-            body: JSON.stringify({
-                mail: this.state.emailAddress,
-                acceptMails: this.state.acceptMails,
-                account: this.props.userName,
-                paymentId: data.paymentID,
-            }),
-        }).then(() => {
-            console.log('success');
-            // successMessage = 'הבקשה נשלחה בהצלחה והדו"ח יישלח למייל בדקות הקרובות.'
-            // me.setState({ successMessage });
-        }).catch((err) => {
-            console.error(err);
-        });
-
         return actions.payment.execute().then(() => {
-            swal('הידד!', 'הדו"ח יישלח אליך בדקות הקרובות.', 'success');
+            _fetch('/report', {
+                method: "POST",
+                headers: { "Content-Type": "application/json; charset=utf-8", },
+                body: JSON.stringify({
+                    mail: this.state.emailAddress,
+                    acceptMails: this.state.acceptMails,
+                    account: this.props.userName,
+                    paymentId: data.paymentID,
+                }),
+            }).then(res => {
+                if (res.status === 200) {
+                    swal('הידד!', 'הדו"ח יישלח אליך בדקות הקרובות.', 'success');
+                } else {
+                    if (res.data) {
+                        connectionFailedEvent(res.status, res.data);
+                    } else {
+                        connectionFailedEvent(res.status, res.statusText);
+                    }
+                    
+                    swal('אופס', 'היתה תקלה, נסה שוב מאוחר יותר', 'error');
+                }
+            }).catch(err => {
+                uncaughtException(err.message, err.stack);
+            });
+        }).catch(err => {
+            uncaughtException(err.message, err.stack);
+            swal('אופס', 'היתה תקלה ב- PayPal', 'error');
         });
     }
 

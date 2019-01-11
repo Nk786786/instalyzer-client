@@ -3,6 +3,7 @@ import './SearchUserTextBox.css';
 import { Route } from 'react-router-dom'
 import { debounce } from 'throttle-debounce';
 import { _fetch } from '../../HttpService';
+import { connectionFailedEvent, uncaughtException } from '../../utils';
 
 class SearchUserTextBox extends Component {
     constructor(props) {
@@ -27,10 +28,19 @@ class SearchUserTextBox extends Component {
 
     searchUsers(account) {
         _fetch('/accounts?query=' + account)
-            .then((response) => {
-                return response.json();
+            .then(res => {
+                if (res.status === 200) {
+                    return res.json();
+                } else {
+                    if (res.data) {
+                        connectionFailedEvent(res.status, res.data);
+                    } else {
+                        connectionFailedEvent(res.status, res.statusText);
+                    }
+                    return;
+                }
             })
-            .then((jsonResponse) => {
+            .then(jsonResponse => {
                 const foundUsers = jsonResponse.map(function (userData) {
                     return ({
                         userName: userData.username,
@@ -40,8 +50,8 @@ class SearchUserTextBox extends Component {
                 });
                 this.setState({ foundUsers });
             })
-            .catch((err) => {
-                console.error(err);
+            .catch(err => {
+                uncaughtException(err.message, err.stack);
             });
     }
 
