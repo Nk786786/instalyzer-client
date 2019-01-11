@@ -9,6 +9,6 @@ export const numberWithUnit = function (number) {
 }
 
 export const validateEmailAddress = function (emailAddress) {
-    var re = /\S+@\S+\.\S+/;
+    const re = /\S+@\S+\.\S+/;
     return re.test(emailAddress);
 }
