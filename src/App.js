@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './views/Home/Home';
 import Preview from './views/Preview/Preview';
 import Contact from './views/Contact/Contact';
+import ExampleReport from './views/ExampleReport/ExampleReport';
 
 class App extends Component {
   render() {
@@ -23,7 +24,8 @@ class App extends Component {
               </div>
               <div>
                 <ul className='main-menu' style={{ listStyleType: 'none' }}>
-                  <li><Link className='menu-link-item' to="/contact">צור קשר</Link></li>
+                <li><Link className='menu-link-item' to="/example-report">דו"ח לדוגמא</Link></li>
+                <li><Link className='menu-link-item' to="/contact">צור קשר</Link></li>
                   {/* <li><Link className='menu-link-item' to="/about">עלינו</Link></li>
                   <li><Link className='menu-link-item' to="/pricing">מחירון</Link></li>
                   <li><Link className='menu-link-item' to="/popular">חיפושים נפוצים</Link></li> */}
@@ -35,6 +37,7 @@ class App extends Component {
           <div className='app-body'>
             <Route exact path="/" component={Home} />
             <Route path="/contact" component={Contact} />
+            <Route path="/example-report" component={ExampleReport} />
             {/* <Route path="/about" component={About} /> */}
             {/* <Route path="/pricing" component={Topics} /> */}
             {/* <Route path="/popular" component={Topics} /> */}
