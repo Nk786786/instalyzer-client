@@ -7,5 +7,3 @@ if(process.env.NODE_ENV === 'production') {
 export const _fetch = function (path, init) {
     return fetch(defaultUrl + path, init);
 }
-
-export const backendUrl = defaultUrl;
