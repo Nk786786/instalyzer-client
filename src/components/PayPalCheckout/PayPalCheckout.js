@@ -4,16 +4,7 @@ import swal from 'sweetalert';
 import { validateEmailAddress, connectionFailedEvent, uncaughtException } from '../../utils';
 import { _fetch } from '../../HttpService';
 
-const PAYPAL_SANDBOX_CLIENT = process.env.PAYPAL_SANDBOX_CLIENT;
-const PAYPAL_PROD_CLIENT = process.env.PAYPAL_PROD_CLIENT;
-const PAYPAL_ENV = process.env.PAYPAL_ENV;
-
 const PayPalButton = window.paypal.Button.driver('react', { React, ReactDOM });
-
-const paypalClient = {
-    sandbox: PAYPAL_SANDBOX_CLIENT,
-    production: PAYPAL_PROD_CLIENT,
-};
 
 class PayPalCheckout extends React.Component {
     constructor(props) {
@@ -50,11 +41,10 @@ class PayPalCheckout extends React.Component {
     }
 
     onAuthorize(data, actions) {
-        const paymentExecute = process.env.NODE_ENV === 'development'
-            ? () => new Promise((resolve, reject) => resolve())
-            : actions.payment.execute;
+        const paymentExecute = process.env.REACT_APP_PAYPAL_ENABLE
+            ? actions.payment.execute
+            : Promise.resolve;
 
-        // return actions.payment.execute().then(() => {
         return paymentExecute().then(() => {
             _fetch('/report', {
                 method: "POST",
@@ -124,27 +114,34 @@ class PayPalCheckout extends React.Component {
     }
 
     render() {
-        const paypalButton = <PayPalButton
-            commit={true}
-            env={PAYPAL_ENV}
-            client={paypalClient}
-            payment={this.payment}
-            onAuthorize={this.onAuthorize}
-            onClick={this.onClick}
-            validate={this.validate}
-            locale='he_IL'
-            style={{
-                label: 'paypal',
-                size: 'medium',    // small | medium | large | responsive
-                shape: 'rect',     // pill | rect
-                color: 'gold',     // gold | blue | silver | black
-                tagline: false
-            }}
-        />
-
-        const devButton = <button onClick={() => this.onAuthorize('dummy')} style={{
-            width: '300px', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
-        }}>מעבר לתשלום</button>
+        const getButon = (paypalEnable) => {
+            if (paypalEnable) {
+               return <PayPalButton
+                        commit={true}
+                        env={process.env.REACT_APP_PAYPAL_ENV}
+                        client={{
+                            sandbox: process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT,
+                            production: process.env.REACT_APP_PAYPAL_LIVE_CLIENT,
+                        }}
+                        payment={this.payment}
+                        onAuthorize={this.onAuthorize}
+                        onClick={this.onClick}
+                        validate={this.validate}
+                        locale='he_IL'
+                        style={{
+                            label: 'paypal',
+                            size: 'medium',    // small | medium | large | responsive
+                            shape: 'rect',     // pill | rect
+                            color: 'gold',     // gold | blue | silver | black
+                            tagline: false
+                        }}
+                    />;
+            } else {
+                return <button onClick={() => this.onAuthorize('dummy')} style={{
+                    width: '300px', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
+                }}>מעבר לתשלום</button>;
+            }
+        }
 
         return (
             <div>
@@ -156,10 +153,7 @@ class PayPalCheckout extends React.Component {
                         <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
                     }
                     <div style={{ marginTop: '10px' }}>
-                        {process.env.NODE_ENV === 'development'
-                            ? devButton
-                            : paypalButton
-                        }
+                        {getButon(process.env.REACT_APP_PAYPAL_ENABLE)}
                     </div>
                 </div>
             </div>
