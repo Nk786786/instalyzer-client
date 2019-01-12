@@ -41,9 +41,9 @@ class PayPalCheckout extends React.Component {
     }
 
     onAuthorize(data, actions) {
-        const paymentExecute = process.env.REACT_APP_PAYPAL_ENABLE
+        const paymentExecute = process.env.REACT_APP_PAYPAL_ENABLE === "true"
             ? actions.payment.execute
-            : Promise.resolve;
+            : () =>  (Promise.resolve());
 
         return paymentExecute().then(() => {
             _fetch('/report', {
@@ -153,7 +153,7 @@ class PayPalCheckout extends React.Component {
                         <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
                     }
                     <div style={{ marginTop: '10px' }}>
-                        {getButon(process.env.REACT_APP_PAYPAL_ENABLE)}
+                        {getButon(process.env.REACT_APP_PAYPAL_ENABLE === "true")}
                     </div>
                 </div>
             </div>
