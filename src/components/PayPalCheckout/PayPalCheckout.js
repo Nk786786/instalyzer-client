@@ -50,7 +50,12 @@ class PayPalCheckout extends React.Component {
     }
 
     onAuthorize(data, actions) {
-        return actions.payment.execute().then(() => {
+        const paymentExecute = process.env.NODE_ENV === 'development'
+            ? () => new Promise((resolve, reject) => resolve())
+            : actions.payment.execute;
+
+        // return actions.payment.execute().then(() => {
+        return paymentExecute().then(() => {
             _fetch('/report', {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8", },
@@ -119,6 +124,28 @@ class PayPalCheckout extends React.Component {
     }
 
     render() {
+        const paypalButton = <PayPalButton
+            commit={true}
+            env={PAYPAL_ENV}
+            client={paypalClient}
+            payment={this.payment}
+            onAuthorize={this.onAuthorize}
+            onClick={this.onClick}
+            validate={this.validate}
+            locale='he_IL'
+            style={{
+                label: 'paypal',
+                size: 'medium',    // small | medium | large | responsive
+                shape: 'rect',     // pill | rect
+                color: 'gold',     // gold | blue | silver | black
+                tagline: false
+            }}
+        />
+
+        const devButton = <button onClick={() => this.onAuthorize('dummy')} style={{
+            width: '300px', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
+        }}>מעבר לתשלום</button>
+
         return (
             <div>
                 <div style={{ marginTop: '20px' }}>לבדיקת החשבון {this.props.userName} בעלות של 20 ש"ח בלבד יש להזין כתובת אימייל תקינה שאליה יישלח הדו"ח המפורט.</div>
@@ -129,23 +156,10 @@ class PayPalCheckout extends React.Component {
                         <div style={{ color: 'red', fontSize: '13px', marginTop: '3px' }}>{this.state.emailError}</div>
                     }
                     <div style={{ marginTop: '10px' }}>
-                        <PayPalButton
-                            commit={true}
-                            env={PAYPAL_ENV}
-                            client={paypalClient}
-                            payment={this.payment}
-                            onAuthorize={this.onAuthorize}
-                            onClick={this.onClick}
-                            validate={this.validate}
-                            locale='he_IL'
-                            style={{
-                                label: 'paypal',
-                                size: 'medium',    // small | medium | large | responsive
-                                shape: 'rect',     // pill | rect
-                                color: 'gold',     // gold | blue | silver | black
-                                tagline: false
-                            }}
-                        />
+                        {process.env.NODE_ENV === 'development'
+                            ? devButton
+                            : paypalButton
+                        }
                     </div>
                 </div>
             </div>
