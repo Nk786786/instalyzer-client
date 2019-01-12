@@ -86,7 +86,10 @@ class Preview extends Component {
                                         <span className='preview-account-social-item'><b>{numberWithUnit(this.state.followers)}</b> עוקבים</span>
                                         <span className='preview-account-social-item'><b>{numberWithUnit(this.state.following)}</b> עוקב</span>
                                     </div>
-                                    <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
+                                    {this.state.followers < 1000
+                                        ? <div style={{ marginTop: '30px', border: '1px solid black', padding: '10px' }}>לא ניתן לבדוק משתמשים עם מתחת ל-1000 עוקבים</div>
+                                        : <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
+                                    }
                                 </div>
                             </div>
                             {this.state.modalOpen &&

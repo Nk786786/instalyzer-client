@@ -43,7 +43,7 @@ class PayPalCheckout extends React.Component {
     onAuthorize(data, actions) {
         const paymentExecute = process.env.REACT_APP_PAYPAL_ENABLE === "true"
             ? actions.payment.execute
-            : () =>  (Promise.resolve());
+            : () => (Promise.resolve());
 
         return paymentExecute().then(() => {
             _fetch('/report', {
@@ -116,26 +116,26 @@ class PayPalCheckout extends React.Component {
     render() {
         const getButon = (paypalEnable) => {
             if (paypalEnable) {
-               return <PayPalButton
-                        commit={true}
-                        env={process.env.REACT_APP_PAYPAL_ENV}
-                        client={{
-                            sandbox: process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT,
-                            production: process.env.REACT_APP_PAYPAL_LIVE_CLIENT,
-                        }}
-                        payment={this.payment}
-                        onAuthorize={this.onAuthorize}
-                        onClick={this.onClick}
-                        validate={this.validate}
-                        locale='he_IL'
-                        style={{
-                            label: 'paypal',
-                            size: 'medium',    // small | medium | large | responsive
-                            shape: 'rect',     // pill | rect
-                            color: 'gold',     // gold | blue | silver | black
-                            tagline: false
-                        }}
-                    />;
+                return <PayPalButton
+                    commit={true}
+                    env={process.env.REACT_APP_PAYPAL_ENV}
+                    client={{
+                        sandbox: process.env.REACT_APP_PAYPAL_SANDBOX_CLIENT,
+                        production: process.env.REACT_APP_PAYPAL_LIVE_CLIENT,
+                    }}
+                    payment={this.payment}
+                    onAuthorize={this.onAuthorize}
+                    onClick={this.onClick}
+                    validate={this.validate}
+                    locale='he_IL'
+                    style={{
+                        label: 'paypal',
+                        size: 'medium',    // small | medium | large | responsive
+                        shape: 'rect',     // pill | rect
+                        color: 'gold',     // gold | blue | silver | black
+                        tagline: false
+                    }}
+                />;
             } else {
                 return <button onClick={() => this.onAuthorize('dummy')} style={{
                     width: '300px', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
