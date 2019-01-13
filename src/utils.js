@@ -11,10 +11,12 @@ export const numberWithUnit = (number) => {
 export const validateEmailAddress = (emailAddress) => /\S+@\S+\.\S+/.test(emailAddress);
 
 export const event = (name, params) => {
-    try {
-        window.gtag('event', name, params);
-    } catch (err) {
-        console.error(err.message);
+    if (process.env.NODE_ENV === 'production') {
+        try {
+            window.gtag('event', name, params);
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 }
 
