@@ -6,7 +6,7 @@ import Home from './views/Home/Home';
 import Preview from './views/Preview/Preview';
 import Contact from './views/Contact/Contact';
 import ExampleReport from './views/ExampleReport/ExampleReport';
-
+console.log(process.env.NODE_ENV);
 class App extends Component {
   render() {
     return (
