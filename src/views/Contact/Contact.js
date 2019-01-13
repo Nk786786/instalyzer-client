@@ -2,12 +2,7 @@ import React from 'react';
 import { validateEmailAddress } from '../../utils';
 import { _fetch } from '../../HttpService';
 
-const fieldKeyStyle = {
-    minWidth: '100px',
-}
-
 const fieldInputStyle = {
-    width: '400px',
     marginBottom: '15px',
 }
 
@@ -104,14 +99,13 @@ export class Contact extends React.Component {
 
     render() {
         return <div style={{ marginBottom: '30px' }}>
-            <h3>יצירת קשר</h3>
-            {/* <form action={backendUrl + '/contact'} method='post' style={{ width: '407px', display: 'flex', flexDirection: 'column' }}> */}
-            <div style={{ width: '407px', display: 'flex', flexDirection: 'column' }}>
-                <span style={fieldKeyStyle}>שם מלא</span>
+            <h3>יצירת קשר</h3>{/* <form action={backendUrl + '/contact'} method='post' style={{ width: '407px', display: 'flex', flexDirection: 'column' }}> */}
+            <div style={{ maxWidth: '500px', display: 'flex', flexDirection: 'column' }}>
+                <span>שם מלא</span>
                 <input value={this.state.fullname} onChange={(e) => this.setFullname(e.target.value)} style={fieldInputStyle} type='text' name='fullname' />
-                <span style={fieldKeyStyle}>אימייל</span>
+                <span>אימייל</span>
                 <input value={this.state.email} onChange={(e) => this.setEmail(e.target.value)} style={fieldInputStyle} type='email' name='email' />
-                <span style={fieldKeyStyle}>תוכן</span>
+                <span>תוכן</span>
                 <textarea value={this.state.message} onChange={(e) => this.setMessage(e.target.value)} style={{ ...fieldInputStyle, height: '150px' }} name='message' />
                 {this.state.error &&
                     <div style={{ color: 'red', marginBottom: '10px', }}>{this.state.error}</div>
