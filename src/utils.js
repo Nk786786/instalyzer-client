@@ -11,6 +11,8 @@ export const numberWithUnit = (number) => {
 export const validateEmailAddress = (emailAddress) => /\S+@\S+\.\S+/.test(emailAddress);
 
 export const event = (name, params) => {
+    console.log(process.env.NODE_ENV);
+
     if (process.env.NODE_ENV === 'production') {
         try {
             window.gtag('event', name, params);
