@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === 'production') {
+if ('%NODE_ENV%' === 'production') {
 	window.dataLayer = window.dataLayer || [];
 	function gtag() { window.dataLayer.push(arguments); }
 	gtag('js', new Date());
