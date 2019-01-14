@@ -98,7 +98,7 @@ export class Contact extends React.Component {
     }
 
     render() {
-        return <div style={{ marginBottom: '30px' }}>
+        return <div style={{ marginBottom: '70px' }}>
             <h3>יצירת קשר</h3>{/* <form action={backendUrl + '/contact'} method='post' style={{ width: '407px', display: 'flex', flexDirection: 'column' }}> */}
             <div style={{ maxWidth: '500px', display: 'flex', flexDirection: 'column' }}>
                 <span>שם מלא</span>

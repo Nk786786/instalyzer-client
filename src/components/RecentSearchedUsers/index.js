@@ -49,7 +49,7 @@ class RecentSearchedUsers extends Component {
         return (
             <div>
                 {this.state.popularSearches.length > 0 &&
-                    <div>
+                    <div className='recent-searched-users-mega-container'>
                         <span style={{ color: '#777777', marginRight: '4px', fontSize: '17px' }}>חיפושים נפוצים</span>
 
                         <div className='recent-searched-users-container'>
