@@ -1,9 +1,11 @@
 import React from 'react';
-import exampleReportImage from './example-report.png';
+import exampleReportImage from './example-report.jpg';
 
 const ExampleReport = () => <div>
     <h3>דו"ח לדוגמא</h3>
-    <img src={exampleReportImage} alt='' style={{ marginBottom: '30px' }} />
+    <div>
+        <img src={exampleReportImage} alt='' style={{ marginBottom: '30px', maxWidth: '100%' }} />
+    </div>
 </div>
 
 export default ExampleReport;

@@ -64,7 +64,9 @@ class SearchUserTextBox extends Component {
     }
 
     previewUser(username, history) {
-        history.push('/preview/' + username);
+        if (username) {
+            history.push('/preview/' + username);
+        }
     }
 
     render() {

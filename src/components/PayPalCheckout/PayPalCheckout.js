@@ -138,7 +138,7 @@ class PayPalCheckout extends React.Component {
                 />;
             } else {
                 return <button onClick={() => this.onAuthorize('dummy')} style={{
-                    width: '300px', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
+                    width: '100%', padding: '8px', backgroundColor: '#ffc439', fontWeight: 'bold', border: 'none', cursor: 'pointer',
                 }}>מעבר לתשלום</button>;
             }
         }
