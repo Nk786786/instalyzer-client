@@ -70,7 +70,7 @@ class Preview extends Component {
         const accountName = this.getAccountName();
 
         return (
-            <div style={{ marginBottom: '30px' }}>
+            <div style={{ marginBottom: '70px' }}>
                 {this.state.userName !== ''
                     ? (
                         <div>

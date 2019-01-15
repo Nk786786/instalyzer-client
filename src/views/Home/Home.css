@@ -21,7 +21,13 @@
     margin-top: 0;
 }
 
+
 .search-box-container {
     max-width: 530px;
-    margin-bottom: 150px;
+    margin-bottom: 40px;
+}
+@media only screen and (min-width: 851px) {
+    .search-box-container {
+        margin-bottom: 150px;
+    }
 }

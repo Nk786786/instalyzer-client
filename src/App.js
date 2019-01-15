@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
+import hamburgerIcon from './hamburger-icon.png';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './views/Home/Home';
@@ -45,15 +46,15 @@ class App extends Component {
                                 </ul>
                             </div>
                             <div onClick={this.toggleMobileMenuOpen} className='main-menu-mobile-container'>
-                                <img alt='' style={{ width: '35px' }} src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/220px-Hamburger_icon.svg.png' />
+                                <img alt='' style={{ width: '35px' }} src={hamburgerIcon} />
                             </div>
                         </div>
                     </div>
                     <div className='app-body-container'>
                         {this.state.mobileMenuOpen &&
                             <div className='mobile-menu-container'>
-                                <Link className='menu-link-item' to="/example-report">דו"ח לדוגמא</Link>
-                                <Link className='menu-link-item' to="/contact">צור קשר</Link>
+                                <Link className='menu-link-item' to="/example-report" onClick={this.toggleMobileMenuOpen}>דו"ח לדוגמא</Link>
+                                <Link className='menu-link-item' to="/contact" onClick={this.toggleMobileMenuOpen}>צור קשר</Link>
                             </div>
                         }
                         <div className='app-body'>
