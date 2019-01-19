@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h3 className='search-header-text'>בדקו כמה עוקבים מזוייפים יש למשתמשי אינסטגרם באמצעות מנגנון חכם ומתקדם</h3>
+                    <h3 className='search-header-text'>חפשו חשבון אינסטגרם וקבלו פירוט על אמינות עוקביו באמצעות מנגנון חכם ומתקדם</h3>
                     <div className='search-box-container'>
                         <SearchUserTextBox />
                     </div>

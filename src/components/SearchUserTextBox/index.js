@@ -57,7 +57,6 @@ class SearchUserTextBox extends Component {
 
     setTextboxValue(value) {
         const textboxValue = value.target.value;
-        // const foundUsers = textboxValue !== '' ? mockListJson : [];
         this.setState({ textboxValue });
 
         this.searchUsers(textboxValue);
