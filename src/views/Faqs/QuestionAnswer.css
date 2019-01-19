@@ -1,0 +1,26 @@
+.question-answer-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.qa-question {
+    color: #3897f0;
+    margin-right: 5px;
+}
+
+.qa-question-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.qa-answer {
+    margin-right: 30px;
+}
+
+.qa-cart-icon {
+    font-size: 13px;
+}

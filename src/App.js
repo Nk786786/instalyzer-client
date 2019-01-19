@@ -7,6 +7,7 @@ import Home from './views/Home/Home';
 import Preview from './views/Preview/Preview';
 import Contact from './views/Contact/Contact';
 import ExampleReport from './views/ExampleReport/ExampleReport';
+import Faqs from './views/Faqs/Faqs';
 
 class App extends Component {
     constructor(props) {
@@ -42,6 +43,7 @@ class App extends Component {
                             <div className='main-menu-desktop-container'>
                                 <ul className='main-menu' style={{ listStyleType: 'none' }}>
                                     <li><Link className='menu-link-item' to="/example-report">דו"ח לדוגמא</Link></li>
+                                    <li><Link className='menu-link-item' to="/faqs">שאלות ותשובות</Link></li>
                                     <li><Link className='menu-link-item' to="/contact">צור קשר</Link></li>
                                 </ul>
                             </div>
@@ -54,6 +56,7 @@ class App extends Component {
                         {this.state.mobileMenuOpen &&
                             <div className='mobile-menu-container'>
                                 <Link className='menu-link-item' to="/example-report" onClick={this.toggleMobileMenuOpen}>דו"ח לדוגמא</Link>
+                                <Link className='menu-link-item' to="/faqs" onClick={this.toggleMobileMenuOpen}>שאלות ותשובות</Link>
                                 <Link className='menu-link-item' to="/contact" onClick={this.toggleMobileMenuOpen}>צור קשר</Link>
                             </div>
                         }
@@ -61,6 +64,7 @@ class App extends Component {
                             <Route exact path="/" component={Home} />
                             <Route path="/contact" component={Contact} />
                             <Route path="/example-report" component={ExampleReport} />
+                            <Route path="/faqs" component={Faqs} />
                             <Route path="/preview" component={Preview} />
                         </div>
                     </div>

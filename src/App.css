@@ -69,6 +69,7 @@
   position: absolute;
   align-self: flex-end;
   padding: 15px;
+  cursor: pointer;
 }
 
 .main-menu {
@@ -95,12 +96,12 @@
     width: 65%;
   }
 } */
-@media only screen and (max-width: 1150px) and (min-width: 601px) {
+@media only screen and (max-width: 1366px) and (min-width: 601px) {
   .heading {
     width: 70%;
   }
 }
-@media only screen and (min-width: 1151px) {
+@media only screen and (min-width: 1367px) {
   .app-body {
     width: 45%;
   }
@@ -108,7 +109,7 @@
     width: 50%;
   }
 }
-@media only screen and (min-width: 851px) {
+@media only screen and (min-width: 1001px) {
   .logo-image-container {
     margin-right: 0;
   }
