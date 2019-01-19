@@ -146,7 +146,7 @@ class PayPalCheckout extends React.Component {
         return (
             <div>
                 <div style={{ marginTop: '20px' }}>לבדיקת החשבון {this.props.userName} בעלות של 20 ש"ח בלבד יש להזין כתובת אימייל תקינה שאליה יישלח הדו"ח המפורט.</div>
-                <span>כתובת המייל תתווסף לרשימת התפוצה לצורך קבלת תוכן שיווקי.</span>
+                <span style={{ fontSize: '11px', color: 'rgb(119, 119, 119)' }}>כתובת המייל תתווסף לרשימת התפוצה לצורך קבלת תוכן שיווקי.</span>
                 <div>
                     <input onBlur={this.updateEmailAddressTextbox} dir="ltr" type='text' placeholder='example@mail.com' className='preview-email-input' />
                     {this.state.emailError &&
