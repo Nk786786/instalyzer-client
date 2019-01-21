@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import swal from 'sweetalert';
-import { validateEmailAddress, connectionFailedEvent, uncaughtException } from '../../utils';
+import { validateEmailAddress, connectionFailedEvent, uncaughtException, event } from '../../utils';
 import { _fetch } from '../../HttpService';
 
 const PayPalButton = window.paypal.Button.driver('react', { React, ReactDOM });
@@ -46,6 +46,8 @@ class PayPalCheckout extends React.Component {
             : () => (Promise.resolve());
 
         return paymentExecute().then(() => {
+            event('purchase', {transaction_id: data.paymentID, value: 20, currency: 'ILS' });
+
             _fetch('/report', {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8", },
