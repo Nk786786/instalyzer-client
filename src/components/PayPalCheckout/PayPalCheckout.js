@@ -46,7 +46,7 @@ class PayPalCheckout extends React.Component {
             : () => (Promise.resolve());
 
         return paymentExecute().then(() => {
-            event('purchase', {transaction_id: data.paymentID, value: 20, currency: 'ILS' });
+            event('purchase', { transaction_id: data.paymentID, value: 20, currency: 'ILS' });
 
             _fetch('/report', {
                 method: "POST",

@@ -64,7 +64,7 @@ class SearchUserTextBox extends Component {
 
     previewUser(username, history) {
         if (username) {
-            event('user has searched an account', { account: username });
+            event(`user has searched an account ${username}`, { event_category: 'flow', event_label: 'search account' });
             history.push('/preview/' + username);
         }
     }
