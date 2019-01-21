@@ -3,7 +3,7 @@ import './SearchUserTextBox.css';
 import { Route } from 'react-router-dom'
 import { debounce } from 'throttle-debounce';
 import { _fetch } from '../../HttpService';
-import { connectionFailedEvent, uncaughtException } from '../../utils';
+import { connectionFailedEvent, uncaughtException, event } from '../../utils';
 
 class SearchUserTextBox extends Component {
     constructor(props) {
@@ -64,6 +64,7 @@ class SearchUserTextBox extends Component {
 
     previewUser(username, history) {
         if (username) {
+            event('user has searched an account', { account: username });
             history.push('/preview/' + username);
         }
     }
