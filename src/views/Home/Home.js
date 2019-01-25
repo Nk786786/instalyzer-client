@@ -28,18 +28,21 @@ class Home extends Component {
         return (
             <div>
                 <div className='home-search-search-and-preview-container'>
-                    <h3 className='search-header-text'>חפשו חשבון אינסטגרם וקבלו פירוט על אמינות עוקביו באמצעות מנגנון חכם ומתקדם</h3>
-                    <div className='search-box-container'>
-                        <SearchUserTextBox />
+                    <div className='home-search-container'>
+                        <h3 className='search-header-text'>חפשו חשבון אינסטגרם וקבלו פירוט על אמינות עוקביו באמצעות מנגנון חכם ומתקדם</h3>
+                        <div className='search-box-container'>
+                            <SearchUserTextBox />
+                        </div>
                     </div>
-                    <div>
+                    <div className='home-preview-report-conatiner'>
                         <h5>דו"ח לדוגמא - לחצו להגדלה</h5>
-                        <img onClick={this.toggleEnlargePreview} style={{ width: '30%', cursor: 'pointer' }} src={exampleReportImage} alt='example-report' />
+                        <img onClick={this.toggleEnlargePreview} className='home-preview-report-img' src={exampleReportImage} alt='example-report' />
                         {enlargePreview && (
                             <Lightbox
                                 mainSrc={exampleReportImage}
                                 onCloseRequest={this.toggleEnlargePreview}
                                 enableZoom={false}
+                                imagePadding={60}
                             />
                         )}
                     </div>
