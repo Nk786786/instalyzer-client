@@ -1,5 +1,5 @@
 import React from 'react';
-import exampleReportImage from './example-report.jpg';
+import exampleReportImage from '../../images/example-report.jpg';
 
 const ExampleReport = () => <div>
     <h3>דו"ח לדוגמא</h3>

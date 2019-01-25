@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.png';
-import hamburgerIcon from './hamburger-icon.png';
-import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import Home from './views/Home/Home';
 import Preview from './views/Preview/Preview';
 import Contact from './views/Contact/Contact';
 import ExampleReport from './views/ExampleReport/ExampleReport';
 import Faqs from './views/Faqs/Faqs';
+
+import hamburgerIcon from './hamburger-icon.png';
+import logo from './logo.png';
+
+import 'react-image-lightbox/style.css';
+import './App.css';
 
 class App extends Component {
     constructor(props) {
