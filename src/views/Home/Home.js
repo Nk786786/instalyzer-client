@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Lightbox from 'react-image-lightbox';
+import { event } from '../../utils';
 
 import SearchUserTextBox from '../../components/SearchUserTextBox';
 import RecentSearchedUsers from '../../components/RecentSearchedUsers';
@@ -21,6 +22,7 @@ class Home extends Component {
     toggleEnlargePreview() {
         const enlargePreview = !this.state.enlargePreview;
         this.setState({ enlargePreview });
+        event(`user has clicked on example report`, { event_category: 'flow', event_label: 'example report' });
     }
 
     render() {
