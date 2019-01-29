@@ -59,7 +59,7 @@ class RecentSearchedUsers extends Component {
                                     <div dir="ltr" className='recent-searched-users-item-text recent-searched-users-item-displayname'>{item.displayName}</div>
                                     <a dir="ltr" href={'/preview/' + item.userName} className='recent-searched-users-item-text recent-searched-users-item-username'>@{item.userName}</a>
                                     <div className='recent-searched-users-item-account-details'>
-                                        <div className='recent-searched-users-item-account-details-item'>
+                                        {/* <div className='recent-searched-users-item-account-details-item'>
                                             <span className='recent-searched-users-detail-name'>פוסטים</span>
                                             <span className='recent-searched-users-detail-value'>{numberWithUnit(item.posts)}</span>
                                         </div>
@@ -71,7 +71,7 @@ class RecentSearchedUsers extends Component {
                                         <div className='recent-searched-users-item-account-details-item'>
                                             <span className='recent-searched-users-detail-name'>עוקבים</span>
                                             <span className='recent-searched-users-detail-value'>{numberWithUnit(item.followers)}</span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             ))}
