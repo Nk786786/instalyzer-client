@@ -81,11 +81,11 @@ class Preview extends Component {
                                         <a className='preview-account-username' rel="noopener noreferrer" target="_blank" href={'https://www.instagram.com/' + this.state.userName}>{this.state.userName}@</a>
                                         <span className='preview-account-displayname'>{this.state.fullName}</span>
                                     </div>
-                                    <div className='preview-account-social-container'>
+                                    {/* <div className='preview-account-social-container'>
                                         <span className='preview-account-social-item'><b>{numberWithUnit(this.state.posts)}</b> פוסטים</span>
                                         <span className='preview-account-social-item'><b>{numberWithUnit(this.state.followers)}</b> עוקבים</span>
                                         <span className='preview-account-social-item'><b>{numberWithUnit(this.state.following)}</b> עוקב</span>
-                                    </div>
+                                    </div> */}
                                     {this.state.followers < 1000
                                         ? <div style={{ marginTop: '30px', border: '1px solid black', padding: '10px' }}>לא ניתן לבדוק משתמשים עם מתחת ל-1000 עוקבים</div>
                                         : <div className='preview-check-account-button' onClick={this.toggleModalOpen}>בדוק משתמש</div>
