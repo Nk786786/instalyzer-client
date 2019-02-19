@@ -48,6 +48,9 @@ class Home extends Component {
                             />
                         )}
                     </div>
+                    <div className='home-preview-report-url'>
+                        <a href="/example-report" rel="noopener noreferrer" target="_blank">לחצו לצפיה בדו"ח לדוגמא</a>
+                    </div>
                 </div>
                 <RecentSearchedUsers />
             </div>

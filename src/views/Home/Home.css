@@ -22,6 +22,7 @@
 
 .home-preview-report-conatiner {
     display: none;
+    align-items: initial;
 }
 
 .home-preview-report-img {
@@ -40,7 +41,24 @@
     max-width: 530px;
 }
 
+.home-preview-report-url {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+.home-preview-report-url a {
+    color: #3897f0;
+    font-size: 17px;
+    text-align: center;
+    font-weight: 600;
+    padding: 5px;
+}
+
 @media only screen and (min-width: 451px) {
+    .home-preview-report-url {
+        display: none;
+    }
     .home-preview-report-conatiner {
         display: flex;
         flex-direction: column;
@@ -48,7 +66,7 @@
     }
 }
 @media only screen and (min-width: 1001px) {
-    .home-preview-report-conatiner {
-        align-items: initial;
+    .home-search-search-and-preview-container {
+        flex-direction: row;
     }
 }
